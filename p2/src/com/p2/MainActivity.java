@@ -47,12 +47,18 @@ public class MainActivity extends DroidGap {
 		MyAlertDialog.show();
 	}
 	
-	private void showCall(MainActivity mainActivity){
-	Log.d(MainActivity.ACTIVITY_TAG, "---執行showCall---");
+	private void showCall(){
+		Log.d(MainActivity.ACTIVITY_TAG, "---執行showCall---");
+		
+		final Intent myIntentDial = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+strPhone));
+		myIntentDial.setAction("android.intent.action.CALL");
+		myIntentDial.setData(Uri.parse("tel:"+strPhone));
 	
-	Intent dial = new Intent();
-    dial.setAction("android.intent.action.CALL");
-	dial.setData(Uri.parse("tel:"+strPhone));
+		DialogInterface.OnClickListener callout = new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int which) {
+				 startActivity(myIntentDial);
+			}	
+		};
     
     
 	}
